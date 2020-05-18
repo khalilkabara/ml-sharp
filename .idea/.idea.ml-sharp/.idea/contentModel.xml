@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\TOG\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\TOG\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_ml-sharp.-1296659857.00" t="ExcludeRecursive" />
+    <e p="C:\Users\TOG\Documents\Projects\Rider Projects\ml-sharp" t="IncludeFlat">
+      <e p="ml-sharp.sln" t="IncludeFlat" />
+      <e p="MlSharp" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="MlSharp.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="MlSharp.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Perceptron" t="Include">
+          <e p="Perceptron.cs" t="Include" />
+        </e>
+        <e p="Tests" t="Include">
+          <e p="Program.cs" t="Include" />
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
