@@ -29,7 +29,7 @@ namespace ml_sharp.Genetics
         /// <param name="traits"></param>
         public GeneticNode(List<Trait> traits)
         {
-            SetNodeName(UuidUtility.GenerateUuid());
+            NodeName = UuidUtility.GenerateUuid();
             Traits = traits;
         }
 
@@ -37,16 +37,24 @@ namespace ml_sharp.Genetics
         /// Return current node values in a dictionary.
         /// </summary>
         /// <returns></returns>
-        public override Dictionary<string, object> NodeAsDictionary()
+        public override Dictionary<string, object> AsDictionary()
         {
-            var dict = base.NodeAsDictionary();
-            dict.Add("Traits", GetAllTraitsAsDictionary());
+            var dict = base.AsDictionary();
+            dict.Add("traits", GetAllTraitsAsDictionary());
             return dict;
         }
 
         private Dictionary<string, object> GetAllTraitsAsDictionary()
         {
-            return Traits.ToDictionary<Trait, string, object>(trait => trait.TraitName, trait => trait.TraitValue);
+            var dict = new Dictionary<string, object>();
+            var count = 0;
+            foreach (var trait in Traits)
+            {
+                dict.Add(count.ToString(), trait.AsDictionary());
+                count++;
+            }
+
+            return dict;
         }
     }
 }

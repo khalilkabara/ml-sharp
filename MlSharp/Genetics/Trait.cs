@@ -44,10 +44,23 @@ namespace ml_sharp.Genetics
             TraitName = UuidUtility.GenerateUuid();
             TraitValue = traitValue;
         }
-
-        public Dictionary<string, object> TraitAsDictionary()
+        
+        /// <summary>
+        /// Creates a genetic trait. A distinguishing quality or characteristic belonging to a GeneticAlgorithm.
+        /// When this constructor is used, TraitValue will be assigned a value of 1.0f
+        /// </summary>
+        /// <param name="traitName">Initial value for this trait (between 0 and 1)</param>
+        public Trait(string traitName)
         {
-            var dict = new Dictionary<string, object> {{"TraitName", TraitName}, {"TraitValue", TraitValue}};
+            TraitName = traitName;
+            TraitValue = 1.0f;
+        }
+
+        public override Dictionary<string, object> AsDictionary()
+        {
+            var dict = base.AsDictionary();
+            dict.Add("trait_name", TraitName);
+            dict.Add("trait_value", TraitValue);
             return dict;
         }
     }

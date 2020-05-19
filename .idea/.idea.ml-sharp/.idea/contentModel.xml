@@ -12,6 +12,9 @@
           <e p="MlSharpNode.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Enums" t="Include">
+          <e p="EAlgorithmType.cs" t="Include" />
+        </e>
         <e p="Genetics" t="Include">
           <e p="Generation.cs" t="Include" />
           <e p="GeneticAlgorithm.cs" t="Include" />

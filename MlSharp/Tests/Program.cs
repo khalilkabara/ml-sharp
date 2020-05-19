@@ -12,13 +12,19 @@ namespace ml_sharp.Tests
         {
             Console.WriteLine("Hello World!");
             var traits = new List<Trait>();
-            traits.Add(new Trait("Size", 0.25f));
-            traits.Add(new Trait(0.70f));
-            traits.Add(new Trait());
+            var trait1 = new Trait("Size", 0.25f);
+            var trait2 = new Trait("Color",0.70f);
+            var trait3 = new Trait("Color");
+            
+            traits.Add(trait1);
+            traits.Add(trait2);
+            traits.Add(trait3);
             var geneticNode = new GeneticNode(traits);
 
-            var nodeAsDict = geneticNode.NodeAsDictionary();
-            Console.WriteLine(SerializationUtility.DictionaryToJson(nodeAsDict));
+            // var nodeAsDict = geneticNode.AsDictionary();
+            Console.WriteLine(geneticNode.Id);
+            // Console.WriteLine(SerializationUtility.DictionaryToJson(nodeAsDict));
+            Console.WriteLine(geneticNode.AsJson());
         }
     }
 }

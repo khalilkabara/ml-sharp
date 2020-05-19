@@ -1,8 +1,21 @@
 ﻿{
-  "NodeName": "1bd23311-48f6-47a1-839c-061de3414dc1",
-  "Traits": {
-    "Size": 0.25,
-    "fcc1c2a9-26be-4284-8d92-18b5b92be139": 0.7,
-    "51a49fe1-10d7-4a3e-b8ed-d558597479bf": 1
+  "id": "73b50a3f-cd3f-41b7-91eb-55aa36062da9",
+  "node_name": "eb7081e0-ada5-4510-85c8-fc9d30dea3d3",
+  "traits": {
+    "0": {
+      "id": "933ba5f8-47da-4aee-ae90-a94fe4474803",
+      "trait_name": "Size",
+      "trait_value": 0.25
+    },
+    "1": {
+      "id": "048b74de-614c-4e23-a095-5191c43ed73d",
+      "trait_name": "97c8d059-1638-4ac8-8282-06c87dba1ba5",
+      "trait_value": 0.7
+    },
+    "2": {
+      "id": "d9be191a-6009-4f76-bc3b-b6d7d998b876",
+      "trait_name": "575e9d62-a1fd-46eb-bb5a-b7db6f029c1a",
+      "trait_value": 1
+    }
   }
 }
