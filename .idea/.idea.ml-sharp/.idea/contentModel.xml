@@ -6,7 +6,18 @@
     <e p="C:\Users\TOG\Documents\Projects\Rider Projects\ml-sharp" t="IncludeFlat">
       <e p="ml-sharp.sln" t="IncludeFlat" />
       <e p="MlSharp" t="IncludeRecursive">
+        <e p="Base" t="Include">
+          <e p="MlSharpAlgorithm.cs" t="Include" />
+          <e p="MlSharpBase.cs" t="Include" />
+          <e p="MlSharpNode.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Genetics" t="Include">
+          <e p="Generation.cs" t="Include" />
+          <e p="GeneticAlgorithm.cs" t="Include" />
+          <e p="GeneticNode.cs" t="Include" />
+          <e p="Trait.cs" t="Include" />
+        </e>
         <e p="MlSharp.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -20,6 +31,11 @@
         </e>
         <e p="Tests" t="Include">
           <e p="Program.cs" t="Include" />
+          <e p="test_json.json" t="Include" />
+        </e>
+        <e p="Utils" t="Include">
+          <e p="SerializationUtility.cs" t="Include" />
+          <e p="UUIDUtility.cs" t="Include" />
         </e>
       </e>
       <e p="packages" t="ExcludeRecursive" />
