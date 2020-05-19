@@ -4,6 +4,9 @@ using ml_sharp.Utils;
 
 namespace ml_sharp.Base
 {
+    /// <summary>
+    /// Parent class for all MlSharp nodes and entities
+    /// </summary>
     public class MlSharpNode : MlSharpBase
     {
         public string NodeName { get; set; }

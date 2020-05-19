@@ -16,10 +16,12 @@
           <e p="EAlgorithmType.cs" t="Include" />
         </e>
         <e p="Genetics" t="Include">
-          <e p="Generation.cs" t="Include" />
+          <e p="Entities" t="Include">
+            <e p="Generation.cs" t="Include" />
+            <e p="GeneticNode.cs" t="Include" />
+            <e p="Trait.cs" t="Include" />
+          </e>
           <e p="GeneticAlgorithm.cs" t="Include" />
-          <e p="GeneticNode.cs" t="Include" />
-          <e p="Trait.cs" t="Include" />
         </e>
         <e p="MlSharp.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -37,6 +39,7 @@
           <e p="test_json.json" t="Include" />
         </e>
         <e p="Utils" t="Include">
+          <e p="MlSharpLogger.cs" t="Include" />
           <e p="SerializationUtility.cs" t="Include" />
           <e p="UUIDUtility.cs" t="Include" />
         </e>
