@@ -31,6 +31,10 @@ namespace ml_sharp.Base
             return new Dictionary<string, object> {{"id", Id}};
         }
 
+        /// <summary>
+        /// Get MlSharp object as json object
+        /// </summary>
+        /// <returns>Returns a json string representing current MlSharp object</returns>
         public string AsJson()
         {
             return SerializationUtility.DictionaryToJson(AsDictionary());

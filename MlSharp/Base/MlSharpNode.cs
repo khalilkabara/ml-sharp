@@ -9,23 +9,23 @@ namespace ml_sharp.Base
     /// </summary>
     public class MlSharpNode : MlSharpBase
     {
-        public string NodeName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// Creates an MlSharp node setting a UUID value for NodeName.
+        /// Creates an MlSharp node setting a UUID value for Name.
         /// </summary>
-        /// <param name="nodeName">Name of the node</param>
-        public MlSharpNode(string nodeName)
+        /// <param name="name">Name of the node</param>
+        public MlSharpNode(string name)
         {
-            NodeName = nodeName;
+            Name = name;
         }
 
         /// <summary>
-        /// Creates an MlSharp node setting a UUID value for NodeName.
+        /// Creates an MlSharp node setting a UUID value for Name.
         /// </summary>
         public MlSharpNode()
         {
-            NodeName = UuidUtility.GenerateUuid();
+            Name = UuidUtility.GenerateUuid();
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace ml_sharp.Base
         public override Dictionary<string, object> AsDictionary()
         {
             var dict = base.AsDictionary();
-            dict.Add("node_name", NodeName);
+            dict.Add("node_name", Name);
             return dict;
         }
     }

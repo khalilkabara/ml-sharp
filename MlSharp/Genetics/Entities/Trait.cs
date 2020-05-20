@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ml_sharp.Base;
 using ml_sharp.Utils;
 
-namespace ml_sharp.Genetics
+namespace ml_sharp.Genetics.Entities
 {
     /// <summary>
     /// A distinguishing quality or characteristic belonging to a GeneticAlgorithm
@@ -26,23 +25,19 @@ namespace ml_sharp.Genetics
         
         /// <summary>
         /// Creates a genetic trait. A distinguishing quality or characteristic belonging to a GeneticAlgorithm.
-        /// When this constructor is used, TraitName will be assigned a UUID value and TraitValue set to 1.0f.
+        /// When this constructor is used, TraitName will be assigned an empty string value and TraitValue set to 1.0f.
         /// </summary>
-        public Trait()
+        public Trait() : this("", 1.0f)
         {
-            TraitName = UuidUtility.GenerateUuid();
-            TraitValue = 1.0f;
         }
 
         /// <summary>
         /// Creates a genetic trait. A distinguishing quality or characteristic belonging to a GeneticAlgorithm.
-        /// When this constructor is used, TraitName will be assigned a UUID value.
+        /// When this constructor is used, TraitName will be assigned an empty string value.
         /// </summary>
         /// <param name="traitValue">Initial value for this trait (between 0 and 1)</param>
-        public Trait(float traitValue)
+        public Trait(float traitValue) : this("", traitValue)
         {
-            TraitName = UuidUtility.GenerateUuid();
-            TraitValue = traitValue;
         }
         
         /// <summary>
@@ -50,12 +45,14 @@ namespace ml_sharp.Genetics
         /// When this constructor is used, TraitValue will be assigned a value of 1.0f
         /// </summary>
         /// <param name="traitName">Initial value for this trait (between 0 and 1)</param>
-        public Trait(string traitName)
+        public Trait(string traitName) : this(traitName, 1.0f)
         {
-            TraitName = traitName;
-            TraitValue = 1.0f;
         }
 
+        /// <summary>
+        /// Get MlSharp object as dictionary
+        /// </summary>
+        /// <returns>Returns a dictionary that represents an MlSharp Object</returns>
         public override Dictionary<string, object> AsDictionary()
         {
             var dict = base.AsDictionary();

@@ -1,158 +1,188 @@
 {
-  "id": "70d440dc-38a7-4291-975f-a2d4bf2ed119",
-  "generation_name": "9603f6fa-1460-4b3d-846b-1ec62c3fd326",
+  "id": "897070a0-9336-4b05-9dd0-67a861620327",
+  "generation_name": "",
   "nodes": {
     "0": {
-      "id": "afe7bd19-c32b-4175-bbfc-a0957e5453d5",
+      "id": "b2cb016d-aaf8-48e2-a773-f2ccdbf04966",
       "node_name": "Alice",
       "traits": {
         "0": {
-          "id": "36d664d3-4d1e-4597-baa8-f2320d2c0229",
+          "id": "632ec731-7799-4c67-80a5-a6975119020b",
           "trait_name": "Size",
           "trait_value": 0.25
         },
         "1": {
-          "id": "b4272891-78b8-493c-887f-ee238fb5c67c",
+          "id": "9903e54f-ea53-4e27-813c-a293fdb38dd5",
           "trait_name": "Color",
           "trait_value": 0.7
         },
         "2": {
-          "id": "b044d275-96dd-45e0-9d49-2971ab64d0c7",
+          "id": "37865b84-2861-45fa-b5d0-f1460e3f97d9",
           "trait_name": "Color",
           "trait_value": 1
         },
         "3": {
-          "id": "bc922ca1-b988-45a9-8aae-90e0f206eb92",
+          "id": "d9bed230-eafd-4542-b618-8c545966f4c1",
+          "trait_name": "",
+          "trait_value": 1
+        },
+        "4": {
+          "id": "d2bfc667-4b3d-4487-9f12-1a1d0ea12ae7",
           "trait_name": "Size 2",
           "trait_value": 0.125
         }
       }
     },
     "1": {
-      "id": "63f7bfeb-6d8a-4f62-a243-47c2b8411a22",
+      "id": "706eb8ad-09aa-4bea-9cda-ab34d091bba1",
       "node_name": "Bob",
       "traits": {
         "0": {
-          "id": "36d664d3-4d1e-4597-baa8-f2320d2c0229",
+          "id": "632ec731-7799-4c67-80a5-a6975119020b",
           "trait_name": "Size",
           "trait_value": 0.25
         },
         "1": {
-          "id": "b4272891-78b8-493c-887f-ee238fb5c67c",
+          "id": "9903e54f-ea53-4e27-813c-a293fdb38dd5",
           "trait_name": "Color",
           "trait_value": 0.7
         },
         "2": {
-          "id": "b044d275-96dd-45e0-9d49-2971ab64d0c7",
+          "id": "37865b84-2861-45fa-b5d0-f1460e3f97d9",
           "trait_name": "Color",
           "trait_value": 1
         },
         "3": {
-          "id": "bc922ca1-b988-45a9-8aae-90e0f206eb92",
+          "id": "d9bed230-eafd-4542-b618-8c545966f4c1",
+          "trait_name": "",
+          "trait_value": 1
+        },
+        "4": {
+          "id": "d2bfc667-4b3d-4487-9f12-1a1d0ea12ae7",
           "trait_name": "Size 2",
           "trait_value": 0.125
         }
       }
     },
     "2": {
-      "id": "f949b905-5654-4191-a067-f5ab9a68e3d3",
+      "id": "41cca028-4450-48c1-9937-08841fbca02e",
       "node_name": "Charlie",
       "traits": {
         "0": {
-          "id": "36d664d3-4d1e-4597-baa8-f2320d2c0229",
+          "id": "632ec731-7799-4c67-80a5-a6975119020b",
           "trait_name": "Size",
           "trait_value": 0.25
         },
         "1": {
-          "id": "b4272891-78b8-493c-887f-ee238fb5c67c",
+          "id": "9903e54f-ea53-4e27-813c-a293fdb38dd5",
           "trait_name": "Color",
           "trait_value": 0.7
         },
         "2": {
-          "id": "b044d275-96dd-45e0-9d49-2971ab64d0c7",
+          "id": "37865b84-2861-45fa-b5d0-f1460e3f97d9",
           "trait_name": "Color",
           "trait_value": 1
         },
         "3": {
-          "id": "bc922ca1-b988-45a9-8aae-90e0f206eb92",
+          "id": "d9bed230-eafd-4542-b618-8c545966f4c1",
+          "trait_name": "",
+          "trait_value": 1
+        },
+        "4": {
+          "id": "d2bfc667-4b3d-4487-9f12-1a1d0ea12ae7",
           "trait_name": "Size 2",
           "trait_value": 0.125
         }
       }
     },
     "3": {
-      "id": "c0efc779-af2a-489c-842e-af06a1151545",
+      "id": "8c7dd2d5-1e27-4023-ad5e-9720a608a834",
       "node_name": "Dave",
       "traits": {
         "0": {
-          "id": "36d664d3-4d1e-4597-baa8-f2320d2c0229",
+          "id": "632ec731-7799-4c67-80a5-a6975119020b",
           "trait_name": "Size",
           "trait_value": 0.25
         },
         "1": {
-          "id": "b4272891-78b8-493c-887f-ee238fb5c67c",
+          "id": "9903e54f-ea53-4e27-813c-a293fdb38dd5",
           "trait_name": "Color",
           "trait_value": 0.7
         },
         "2": {
-          "id": "b044d275-96dd-45e0-9d49-2971ab64d0c7",
+          "id": "37865b84-2861-45fa-b5d0-f1460e3f97d9",
           "trait_name": "Color",
           "trait_value": 1
         },
         "3": {
-          "id": "bc922ca1-b988-45a9-8aae-90e0f206eb92",
+          "id": "d9bed230-eafd-4542-b618-8c545966f4c1",
+          "trait_name": "",
+          "trait_value": 1
+        },
+        "4": {
+          "id": "d2bfc667-4b3d-4487-9f12-1a1d0ea12ae7",
           "trait_name": "Size 2",
           "trait_value": 0.125
         }
       }
     },
     "4": {
-      "id": "e80e3218-1bc6-4009-b207-35eec55cbb97",
+      "id": "97cca565-6df1-4720-a9e7-cfcaae4640ab",
       "node_name": "Ethan",
       "traits": {
         "0": {
-          "id": "36d664d3-4d1e-4597-baa8-f2320d2c0229",
+          "id": "632ec731-7799-4c67-80a5-a6975119020b",
           "trait_name": "Size",
           "trait_value": 0.25
         },
         "1": {
-          "id": "b4272891-78b8-493c-887f-ee238fb5c67c",
+          "id": "9903e54f-ea53-4e27-813c-a293fdb38dd5",
           "trait_name": "Color",
           "trait_value": 0.7
         },
         "2": {
-          "id": "b044d275-96dd-45e0-9d49-2971ab64d0c7",
+          "id": "37865b84-2861-45fa-b5d0-f1460e3f97d9",
           "trait_name": "Color",
           "trait_value": 1
         },
         "3": {
-          "id": "bc922ca1-b988-45a9-8aae-90e0f206eb92",
+          "id": "d9bed230-eafd-4542-b618-8c545966f4c1",
+          "trait_name": "",
+          "trait_value": 1
+        },
+        "4": {
+          "id": "d2bfc667-4b3d-4487-9f12-1a1d0ea12ae7",
           "trait_name": "Size 2",
           "trait_value": 0.125
         }
       }
     },
     "5": {
-      "id": "a1352950-c284-48ca-9506-07ddbfdc781c",
+      "id": "daeaf8f2-877e-4005-a956-6f55fb9d5c89",
       "node_name": "Felix",
       "traits": {
         "0": {
-          "id": "36d664d3-4d1e-4597-baa8-f2320d2c0229",
+          "id": "632ec731-7799-4c67-80a5-a6975119020b",
           "trait_name": "Size",
           "trait_value": 0.25
         },
         "1": {
-          "id": "b4272891-78b8-493c-887f-ee238fb5c67c",
+          "id": "9903e54f-ea53-4e27-813c-a293fdb38dd5",
           "trait_name": "Color",
           "trait_value": 0.7
         },
         "2": {
-          "id": "b044d275-96dd-45e0-9d49-2971ab64d0c7",
+          "id": "37865b84-2861-45fa-b5d0-f1460e3f97d9",
           "trait_name": "Color",
           "trait_value": 1
         },
         "3": {
-          "id": "bc922ca1-b988-45a9-8aae-90e0f206eb92",
+          "id": "d9bed230-eafd-4542-b618-8c545966f4c1",
+          "trait_name": "",
+          "trait_value": 1
+        },
+        "4": {
+          "id": "d2bfc667-4b3d-4487-9f12-1a1d0ea12ae7",
           "trait_name": "Size 2",
           "trait_value": 0.125
         }

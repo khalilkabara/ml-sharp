@@ -2,7 +2,7 @@
 using ml_sharp.Base;
 using ml_sharp.Utils;
 
-namespace ml_sharp.Genetics
+namespace ml_sharp.Genetics.Entities
 {
     /// <summary>
     /// A 'Generation' as a collection of genetic nodes that coexist in tandem.
@@ -11,45 +11,39 @@ namespace ml_sharp.Genetics
     public class Generation : MlSharpBase
     {
         public string GenerationName { get; set; }
-        public List<GeneticNode> Nodes { get; set; }
+        public List<GeneticEntity> Nodes { get; set; }
 
         /// <summary>
         /// Creates a Genetic Generation.
-        /// When this constructor is used, GenerationName is set to a random UUID value and Nodes an empty list of nodes/entities.
         /// </summary>
-        public Generation()
+        public Generation(string generationName, List<GeneticEntity> nodes)
         {
-            GenerationName = UuidUtility.GenerateUuid();
-            Nodes = new List<GeneticNode>();
+            GenerationName = generationName;
+            Nodes = nodes;
+        }
+
+        /// <summary>
+        /// Creates a Genetic Generation.
+        /// When this constructor is used, GenerationName is set to an empty string value and Nodes an empty list of nodes/entities.
+        /// </summary>
+        public Generation() : this("", new List<GeneticEntity>())
+        {
         }
         
         /// <summary>
         /// Creates a Genetic Generation.
         /// When this constructor is used, Nodes is set to an empty list of nodes/entities.
         /// </summary>
-        public Generation(string generationName)
+        public Generation(string generationName) : this(generationName, new List<GeneticEntity>())
         {
-            GenerationName = generationName;
-            Nodes = new List<GeneticNode>();
         }
 
         /// <summary>
         /// Creates a Genetic Generation.
-        /// When this constructor is used, GenerationName is set to a random UUID value.
+        /// When this constructor is used, GenerationName is set to an empty string.
         /// </summary>
-        public Generation(List<GeneticNode> nodes)
+        public Generation(List<GeneticEntity> nodes) : this("", nodes)
         {
-            GenerationName = UuidUtility.GenerateUuid();
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// Creates a Genetic Generation.
-        /// </summary>
-        public Generation(string generationName, List<GeneticNode> nodes)
-        {
-            GenerationName = generationName;
-            Nodes = nodes;
         }
 
         /// <summary>
