@@ -6,14 +6,14 @@ namespace ml_sharp.Genetics
     /// <summary>
     /// Contains useful methods for MlSharp genetic manipulations
     /// </summary>
-    public class GeneticsUtility
+    public class GeneticUtility
     {
         public static void MergeGenerations(List<Generation> generations)
         {
             
         }
 
-        public static Generation ToGeneration(List<GeneticEntity> entities, string generationName = "")
+        public static Generation AsGeneration(List<GeneticEntity> entities, string generationName = "")
         {
             return new Generation(generationName, entities);
         }

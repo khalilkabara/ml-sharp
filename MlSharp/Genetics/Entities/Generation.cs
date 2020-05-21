@@ -5,26 +5,26 @@ using ml_sharp.Utils;
 namespace ml_sharp.Genetics.Entities
 {
     /// <summary>
-    /// A 'Generation' as a collection of genetic nodes that coexist in tandem.
-    /// By default, genetic nodes only breed with other nodes in the same generation.
+    /// A 'Generation' as a collection of genetic entities that coexist in tandem.
+    /// By default, genetic entities only breed with other entities in the same generation.
     /// </summary>
     public class Generation : MlSharpBase
     {
         public string GenerationName { get; set; }
-        public List<GeneticEntity> Nodes { get; set; }
+        public List<GeneticEntity> Entities { get; set; }
 
         /// <summary>
         /// Creates a Genetic Generation.
         /// </summary>
-        public Generation(string generationName, List<GeneticEntity> nodes)
+        public Generation(string generationName, List<GeneticEntity> entities)
         {
             GenerationName = generationName;
-            Nodes = nodes;
+            Entities = entities;
         }
 
         /// <summary>
         /// Creates a Genetic Generation.
-        /// When this constructor is used, GenerationName is set to an empty string value and Nodes an empty list of nodes/entities.
+        /// When this constructor is used, GenerationName is set to an empty string value and Entities an empty list of entities/entities.
         /// </summary>
         public Generation() : this("", new List<GeneticEntity>())
         {
@@ -32,7 +32,7 @@ namespace ml_sharp.Genetics.Entities
         
         /// <summary>
         /// Creates a Genetic Generation.
-        /// When this constructor is used, Nodes is set to an empty list of nodes/entities.
+        /// When this constructor is used, Entities is set to an empty list of entities/entities.
         /// </summary>
         public Generation(string generationName) : this(generationName, new List<GeneticEntity>())
         {
@@ -54,7 +54,7 @@ namespace ml_sharp.Genetics.Entities
         {
             var dict = base.AsDictionary();
             dict.Add("generation_name", GenerationName);
-            dict.Add("nodes", GetAllNodesAsDictionary());
+            dict.Add("entities", GetAllNodesAsDictionary());
             return dict;
         }
 
@@ -66,7 +66,7 @@ namespace ml_sharp.Genetics.Entities
         {
             var dict = new Dictionary<string, object>();
             var count = 0;
-            foreach (var node in Nodes)
+            foreach (var node in Entities)
             {
                 dict.Add(count.ToString(), node.AsDictionary());
                 count++;

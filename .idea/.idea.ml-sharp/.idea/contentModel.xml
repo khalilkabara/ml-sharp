@@ -25,7 +25,7 @@
             <e p="Trait.cs" t="Include" />
           </e>
           <e p="GeneticAlgorithm.cs" t="Include" />
-          <e p="GeneticsUtility.cs" t="Include" />
+          <e p="GeneticUtility.cs" t="Include" />
           <e p="Interfaces" t="Include">
             <e p="IGeneticAlgorithmBuilder.cs" t="Include" />
           </e>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using ml_sharp.Enums;
 using ml_sharp.Genetics;
 using ml_sharp.Genetics.Entities;
 using ml_sharp.Utils;
@@ -13,13 +14,11 @@ namespace ml_sharp.Tests
         {
             var traits = CreateMockTraits();
             var nodes = CreateMockNodes(traits);
-            var f1 = new Generation {Nodes = nodes};
+            var f1 = new Generation {Entities = nodes};
 
-            var f1AsJson = f1.AsJson();
-
+            // new GeneticEntity().ReproduceBatch(13, 0.1f, .9f,)
             // Save json file
-            System.IO.File.WriteAllText(GetSavePath(), f1AsJson);
-            // Console.WriteLine(GetSavePath(f1AsJson));
+            SerializationUtility.Persist(f1, GetSavePath());
         }
 
         private static List<GeneticEntity> CreateMockNodes(List<Trait> traits)
@@ -62,6 +61,7 @@ namespace ml_sharp.Tests
         {
             var currentDirectory = System.IO.Directory.GetCurrentDirectory();
             var basePath = currentDirectory.Split(new string[] {"\\bin"}, StringSplitOptions.None)[0];
+            
             return basePath + "/Tests/test_json.json";
         }
     }
