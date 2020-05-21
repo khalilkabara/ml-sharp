@@ -2,7 +2,7 @@
 
 namespace ml_sharp.Utils
 {
-    public class MlSharpLogger
+    public static class MlSharpLogger
     {
         public static void LogInfo(string message)
         {

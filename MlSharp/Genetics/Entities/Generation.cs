@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using ml_sharp.Base;
-using ml_sharp.Utils;
 
 namespace ml_sharp.Genetics.Entities
 {
@@ -10,7 +9,14 @@ namespace ml_sharp.Genetics.Entities
     /// </summary>
     public class Generation : MlSharpBase
     {
+        /// <summary>
+        /// String name given to current generation.
+        /// </summary>
         public string GenerationName { get; set; }
+
+        /// <summary>
+        /// List of entities belonging to current generation.
+        /// </summary>
         public List<GeneticEntity> Entities { get; set; }
 
         /// <summary>
@@ -29,7 +35,7 @@ namespace ml_sharp.Genetics.Entities
         public Generation() : this("", new List<GeneticEntity>())
         {
         }
-        
+
         /// <summary>
         /// Creates a Genetic Generation.
         /// When this constructor is used, Entities is set to an empty list of entities/entities.

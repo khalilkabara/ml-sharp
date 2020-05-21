@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ml_sharp.Base;
+using ml_sharp.Enums.Genetics;
 using ml_sharp.Utils;
 
 namespace ml_sharp.Genetics.Entities
@@ -83,18 +84,18 @@ namespace ml_sharp.Genetics.Entities
         /// <summary>
         /// Reproduces an offspring using current entity as parent.
         /// </summary>
-        /// <param name="minMutation">Minimum value for offspring mutation (between 0 and 1).
-        /// If minMutation is greater than maxMutation, minMutation is set to the value of maxMutation.</param>
-        /// <param name="maxMutation">Maximum value for offspring mutation (between 0 and 1).
-        ///  If maxMutation is less than minMutation, maxMutation is set to the value of minMutation.</param>
+        /// <param name="mutationValue">Determines the value by which mutation affects traits of resulting entity (between 0 and 1).</param>
+        /// <param name="mutationEffect">Determines how mutation affects value traits inherited by offspring.
+        /// (Positively, negatively, or randomly meaning some traits positively and some negatively at random)</param>
         /// <param name="offspringName">Name of resulting offspring (empty string if not set).</param>
-        /// <param name="seed">Seed for random generator. This is useful when trying to recreate outputs.</param>
+        /// <param name="seed">Seed for random generator. This is useful when trying to recreate outputs.
+        /// When 0 is set, no seed is used. 0 is set by default</param>
         /// <returns>Returns a new GeneticEntity (offspring) built with criteria of current entity as base.</returns>
-        public GeneticEntity ReproduceOne(float minMutation, float maxMutation, string offspringName = "",
-            int seed = -1)
+        public GeneticEntity ReproduceOne(float mutationValue, EMutationEffect mutationEffect = EMutationEffect.Random,
+            string offspringName = "", int seed = 0)
         {
-            var info = new ReproductionInfo(1, minMutation,
-                maxMutation, false, null, new string[] {offspringName}, seed);
+            var info = new ReproductionInfo(1, mutationValue, mutationEffect,
+                false, null, new string[] {offspringName}, seed);
 
             return (GeneticEntity) GeneticAlgorithm.YieldOffspring(info);
         }
@@ -103,20 +104,20 @@ namespace ml_sharp.Genetics.Entities
         /// Reproduces several offspring using current entity as parent.
         /// </summary>
         /// <param name="numOffspring">Number of offspring to reproduce.</param>
-        /// <param name="minMutation">Minimum value for offspring mutation (between 0 and 1).
-        /// If minMutation is greater than maxMutation, minMutation is set to the value of maxMutation.</param>
-        /// <param name="maxMutation">Maximum value for offspring mutation (between 0 and 1).
-        ///  If maxMutation is less than minMutation, maxMutation is set to the value of minMutation.</param>
+        /// <param name="mutationValue">Determines the value by which mutation affects traits of resulting entity (between 0 and 1).</param>
+        /// <param name="mutationEffect">Determines how mutation affects value traits inherited by offspring.
+        /// (Positively, negatively, or randomly meaning some traits positively and some negatively at random)</param>
         /// <param name="offspringNames">Array of names to be given to resulting offspring (empty strings if not set).
         /// If length of names array is shorter than numOffspring, the first n offspring will be assigned names from this list
         /// and the rest set to an empty string.</param>
-        /// <param name="seed">Seed for random generator. This is useful when trying to recreate outputs.</param>
+        /// <param name="seed">Seed for random generator. This is useful when trying to recreate outputs.
+        /// When 0 is set, no seed is used. 0 is set by default</param>
         /// <returns>Returns a new GeneticEntity (offspring) built with criteria of current entity as base.</returns>
-        public List<GeneticEntity> ReproduceBatch(int numOffspring, float minMutation,
-            float maxMutation, string[] offspringNames = null, int seed = -1)
+        public List<GeneticEntity> ReproduceBatch(int numOffspring, float mutationValue,
+            EMutationEffect mutationEffect = EMutationEffect.Random, string[] offspringNames = null, int seed = 0)
         {
-            var info = new ReproductionInfo(numOffspring, minMutation,
-                maxMutation, false, null, offspringNames, seed);
+            var info = new ReproductionInfo(numOffspring, mutationValue, mutationEffect,
+                false, null, offspringNames, seed);
 
             return (List<GeneticEntity>) GeneticAlgorithm.YieldOffspring(info);
         }

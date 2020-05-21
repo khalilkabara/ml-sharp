@@ -16,6 +16,7 @@
           <e p="Genetics" t="Include">
             <e p="BreedType.cs" t="Include" />
             <e p="EGeneticAlgorithmType.cs" t="Include" />
+            <e p="EMutationEffect.cs" t="Include" />
           </e>
         </e>
         <e p="Genetics" t="Include">
@@ -48,6 +49,7 @@
         </e>
         <e p="Utils" t="Include">
           <e p="MlSharpLogger.cs" t="Include" />
+          <e p="RandomUtility.cs" t="Include" />
           <e p="SerializationUtility.cs" t="Include" />
           <e p="UUIDUtility.cs" t="Include" />
         </e>

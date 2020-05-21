@@ -12,7 +12,7 @@ namespace ml_sharp.Utils
     /// <summary>
     /// Contains helper methods for serialization and deserialization
     /// </summary>
-    public class SerializationUtility
+    public static class SerializationUtility
     {
         /// <summary>
         /// Converts a dictionary object to JSON and returns the resulting JSON string.

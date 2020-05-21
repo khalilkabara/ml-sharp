@@ -19,6 +19,30 @@ namespace ml_sharp.Tests
             // new GeneticEntity().ReproduceBatch(13, 0.1f, .9f,)
             // Save json file
             SerializationUtility.Persist(f1, GetSavePath());
+            TestRandoms();
+        }
+
+        private static void TestRandoms()
+        {
+            var rands = new int[10];
+            var randsf = new float[10];
+
+            for (var i = 0; i < rands.Length; i++)
+            {
+                rands[i] = RandomUtility.GetRandomBinary(40);
+                randsf[i] = RandomUtility.GetRandom01(42);
+            }
+
+            foreach (var rand in rands)
+            {
+                Console.Write(rand + ", ");
+            }
+
+            Console.WriteLine();
+            foreach (var rand in randsf)
+            {
+                Console.Write(rand + ", ");
+            }
         }
 
         private static List<GeneticEntity> CreateMockNodes(List<Trait> traits)
