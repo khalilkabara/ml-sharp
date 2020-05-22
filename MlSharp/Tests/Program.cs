@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json;
-using ml_sharp.Enums;
-using ml_sharp.Genetics;
+using System.IO;
 using ml_sharp.Genetics.Entities;
 using ml_sharp.Utils;
 
 namespace ml_sharp.Tests
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var traits = CreateMockTraits();
             var nodes = CreateMockNodes(traits);
@@ -18,8 +16,10 @@ namespace ml_sharp.Tests
 
             // new GeneticEntity().ReproduceBatch(13, 0.1f, .9f,)
             // Save json file
-            SerializationUtility.Persist(f1, GetSavePath());
+            MlsSerializationUtil.Persist(f1, GetSavePath());
             TestRandoms();
+            Console.WriteLine();
+            Console.WriteLine(new GeneticEntity().AsJson());
         }
 
         private static void TestRandoms()
@@ -29,20 +29,14 @@ namespace ml_sharp.Tests
 
             for (var i = 0; i < rands.Length; i++)
             {
-                rands[i] = RandomUtility.GetRandomBinary(40);
-                randsf[i] = RandomUtility.GetRandom01(42);
+                rands[i] = MlsRandomUtil.GetRandomBinary(40);
+                randsf[i] = MlsRandomUtil.GetRandom01(42);
             }
 
-            foreach (var rand in rands)
-            {
-                Console.Write(rand + ", ");
-            }
+            foreach (var rand in rands) Console.Write(rand + ", ");
 
             Console.WriteLine();
-            foreach (var rand in randsf)
-            {
-                Console.Write(rand + ", ");
-            }
+            foreach (var rand in randsf) Console.Write(rand + ", ");
         }
 
         private static List<GeneticEntity> CreateMockNodes(List<Trait> traits)
@@ -53,8 +47,8 @@ namespace ml_sharp.Tests
             var dave = new GeneticEntity("Dave", traits);
             var ethan = new GeneticEntity("Ethan", traits);
             var felix = new GeneticEntity("Felix", traits);
-            
-            alice.AddTrait( new Trait("Size 2", 0.125f));
+
+            alice.AddTrait(new Trait("Size 2", 0.125f));
 
             var nodes = new List<GeneticEntity>
             {
@@ -65,7 +59,7 @@ namespace ml_sharp.Tests
                 ethan,
                 felix
             };
-            
+
             return nodes;
         }
 
@@ -80,12 +74,12 @@ namespace ml_sharp.Tests
 
             return traits;
         }
-        
+
         private static string GetSavePath()
         {
-            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            var basePath = currentDirectory.Split(new string[] {"\\bin"}, StringSplitOptions.None)[0];
-            
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var basePath = currentDirectory.Split(new[] {"\\bin"}, StringSplitOptions.None)[0];
+
             return basePath + "/Tests/test_json.json";
         }
     }

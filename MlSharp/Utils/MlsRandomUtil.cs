@@ -2,10 +2,10 @@
 
 namespace ml_sharp.Utils
 {
-    public static class RandomUtility
+    public static class MlsRandomUtil
     {
         /// <summary>
-        /// Generates a random int value between 0 and 1 both inclusive.
+        ///     Generates a random int value between 0 and 1 both inclusive.
         /// </summary>
         /// <param name="seed">Seed for random generator. This is useful when trying to recreate outputs.</param>
         /// <returns>Returns 0 or 1</returns>
@@ -13,9 +13,9 @@ namespace ml_sharp.Utils
         {
             return seed == 0 ? new Random().Next(0, 2) : new Random(seed).Next(0, 2);
         }
-        
+
         /// <summary>
-        /// Generates a random float value between 0 and 1 both inclusive.
+        ///     Generates a random float value between 0 and 1 both inclusive.
         /// </summary>
         /// <param name="seed">Seed for random generator. This is useful when trying to recreate outputs.</param>
         /// <returns>Returns a float that is between 0 and 1 both inclusive</returns>

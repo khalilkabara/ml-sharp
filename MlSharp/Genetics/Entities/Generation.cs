@@ -4,23 +4,13 @@ using ml_sharp.Base;
 namespace ml_sharp.Genetics.Entities
 {
     /// <summary>
-    /// A 'Generation' as a collection of genetic entities that coexist in tandem.
-    /// By default, genetic entities only breed with other entities in the same generation.
+    ///     A 'Generation' as a collection of genetic entities that coexist in tandem.
+    ///     By default, genetic entities only breed with other entities in the same generation.
     /// </summary>
-    public class Generation : MlSharpBase
+    public class Generation : MlsBase
     {
         /// <summary>
-        /// String name given to current generation.
-        /// </summary>
-        public string GenerationName { get; set; }
-
-        /// <summary>
-        /// List of entities belonging to current generation.
-        /// </summary>
-        public List<GeneticEntity> Entities { get; set; }
-
-        /// <summary>
-        /// Creates a Genetic Generation.
+        ///     Creates a Genetic Generation.
         /// </summary>
         public Generation(string generationName, List<GeneticEntity> entities)
         {
@@ -29,31 +19,42 @@ namespace ml_sharp.Genetics.Entities
         }
 
         /// <summary>
-        /// Creates a Genetic Generation.
-        /// When this constructor is used, GenerationName is set to an empty string value and Entities an empty list of entities/entities.
+        ///     Creates a Genetic Generation.
+        ///     When this constructor is used, GenerationName is set to an empty string value and Entities an empty list of
+        ///     entities/entities.
         /// </summary>
         public Generation() : this("", new List<GeneticEntity>())
         {
         }
 
         /// <summary>
-        /// Creates a Genetic Generation.
-        /// When this constructor is used, Entities is set to an empty list of entities/entities.
+        ///     Creates a Genetic Generation.
+        ///     When this constructor is used, Entities is set to an empty list of entities/entities.
         /// </summary>
         public Generation(string generationName) : this(generationName, new List<GeneticEntity>())
         {
         }
 
         /// <summary>
-        /// Creates a Genetic Generation.
-        /// When this constructor is used, GenerationName is set to an empty string.
+        ///     Creates a Genetic Generation.
+        ///     When this constructor is used, GenerationName is set to an empty string.
         /// </summary>
         public Generation(List<GeneticEntity> nodes) : this("", nodes)
         {
         }
 
         /// <summary>
-        /// Return current entity as a dictionary.
+        ///     String name given to current generation.
+        /// </summary>
+        public string GenerationName { get; set; }
+
+        /// <summary>
+        ///     List of entities belonging to current generation.
+        /// </summary>
+        public List<GeneticEntity> Entities { get; set; }
+
+        /// <summary>
+        ///     Return current entity as a dictionary.
         /// </summary>
         /// <returns>Current entity as a dictionary.</returns>
         public override Dictionary<string, object> AsDictionary()
@@ -65,7 +66,7 @@ namespace ml_sharp.Genetics.Entities
         }
 
         /// <summary>
-        /// Get all traits of current entity
+        ///     Get all traits of current entity
         /// </summary>
         /// <returns>Returns all traits belonging to current entity</returns>
         private Dictionary<string, object> GetAllNodesAsDictionary()

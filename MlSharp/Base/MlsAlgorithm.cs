@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using ml_sharp.Enums;
 using ml_sharp.Enums.Genetics;
 
 namespace ml_sharp.Base
 {
     /// <summary>
-    /// Defines an MlSharp genetic algorithm
+    ///     Defines an MlSharp genetic algorithm
     /// </summary>
-    public class MlSharpAlgorithm : MlSharpBase
+    public class MlsAlgorithm : MlsBase
     {
         public EGeneticAlgorithmType GeneticAlgorithmType;
-        
+
         /// <summary>
-        /// Get MlSharp object as dictionary
+        ///     Get MlSharp object as dictionary
         /// </summary>
         /// <returns>Returns a dictionary that represents an MlSharp Object</returns>
         public override Dictionary<string, object> AsDictionary()

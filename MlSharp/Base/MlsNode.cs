@@ -1,41 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ml_sharp.Utils;
 
 namespace ml_sharp.Base
 {
     /// <summary>
-    /// Parent class for all MlSharp nodes and entities
+    ///     Parent class for all MlSharp nodes and entities
     /// </summary>
-    public class MlSharpNode : MlSharpBase
+    public class MlsNode : MlsBase
     {
-        public string Name { get; set; }
-
         /// <summary>
-        /// Creates an MlSharp node setting a UUID value for Name.
+        ///     Creates an MlSharp node setting a UUID value for Name.
         /// </summary>
         /// <param name="name">Name of the node</param>
-        public MlSharpNode(string name)
+        public MlsNode(string name)
         {
             Name = name;
         }
 
         /// <summary>
-        /// Creates an MlSharp node setting a UUID value for Name.
+        ///     Creates an MlSharp node setting a UUID value for Name.
         /// </summary>
-        public MlSharpNode()
+        public MlsNode()
         {
-            Name = UuidUtility.GenerateUuid();
+            Name = MlsUuidUtil.GenerateUuid();
         }
 
+        public string Name { get; set; }
+
         /// <summary>
-        /// Return current node values in a dictionary.
+        ///     Return current node values in a dictionary.
         /// </summary>
         /// <returns></returns>
         public override Dictionary<string, object> AsDictionary()
         {
             var dict = base.AsDictionary();
-            dict.Add("node_name", Name);
+            dict.Add("name", Name);
             return dict;
         }
     }

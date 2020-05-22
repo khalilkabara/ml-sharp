@@ -7,14 +7,14 @@
       <e p="ml-sharp.sln" t="IncludeFlat" />
       <e p="MlSharp" t="IncludeRecursive">
         <e p="Base" t="Include">
-          <e p="MlSharpAlgorithm.cs" t="Include" />
-          <e p="MlSharpBase.cs" t="Include" />
-          <e p="MlSharpNode.cs" t="Include" />
+          <e p="MlsAlgorithm.cs" t="Include" />
+          <e p="MlsBase.cs" t="Include" />
+          <e p="MlsNode.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Enums" t="Include">
+          <e p="ELogLevel.cs" t="Include" />
           <e p="Genetics" t="Include">
-            <e p="BreedType.cs" t="Include" />
             <e p="EGeneticAlgorithmType.cs" t="Include" />
             <e p="EMutationEffect.cs" t="Include" />
           </e>
@@ -48,10 +48,10 @@
           <e p="test_json.json" t="Include" />
         </e>
         <e p="Utils" t="Include">
-          <e p="MlSharpLogger.cs" t="Include" />
-          <e p="RandomUtility.cs" t="Include" />
-          <e p="SerializationUtility.cs" t="Include" />
-          <e p="UUIDUtility.cs" t="Include" />
+          <e p="MlsLogger.cs" t="Include" />
+          <e p="MlsRandomUtil.cs" t="Include" />
+          <e p="MlsSerializationUtil.cs" t="Include" />
+          <e p="MlsUuidUtil.cs" t="Include" />
         </e>
       </e>
       <e p="packages" t="ExcludeRecursive" />

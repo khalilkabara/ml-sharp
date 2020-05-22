@@ -9,7 +9,7 @@ namespace ml_sharp.Genetics.Entities
     /// <summary>
     ///     Defines an MlSharp genetic algorithm entity. A genetic Node
     /// </summary>
-    public class GeneticEntity : MlSharpNode
+    public class GeneticEntity : MlsNode
     {
         /// <summary>
         ///     Creates a genetic entity (node).
@@ -80,7 +80,7 @@ namespace ml_sharp.Genetics.Entities
             }
             catch (Exception e)
             {
-                MlSharpLogger.LogError("Error while adding new trait: " + e.Message);
+                MlsLogger.LogError("Error while adding new trait: " + e.Message);
                 throw;
             }
         }
@@ -89,11 +89,12 @@ namespace ml_sharp.Genetics.Entities
         ///     Reproduces an offspring using current entity as parent.
         /// </summary>
         /// <param name="mutationValue">
-        ///     Determines the value by which mutation affects traits of resulting entity (between 0 and
-        ///     1).
+        Began
+
+        /// Determines the value by which mutation affects traits of resulting entity (between 0 and 1).
         /// </param>
         /// <param name="mutationEffect">
-        ///     Determines how mutation affects value traits inherited by offspring.
+        ///     Determines how mutation affects value of traits inherited by offspring.
         ///     (Positively, negatively, or randomly meaning some traits positively and some negatively at random)
         /// </param>
         /// <param name="offspringName">Name of resulting offspring (empty string if not set).</param>
@@ -105,7 +106,7 @@ namespace ml_sharp.Genetics.Entities
         public GeneticEntity ReproduceOne(float mutationValue, EMutationEffect mutationEffect = EMutationEffect.Random,
             string offspringName = "", int seed = 0)
         {
-            var info = new ReproductionInfo(1, mutationValue, mutationEffect,
+            var info = new ReproductionInfo(this, 1, mutationValue, mutationEffect,
                 false, null, new[] {offspringName}, seed);
 
             return (GeneticEntity) GeneticAlgorithm.YieldOffspring(info);
@@ -116,11 +117,10 @@ namespace ml_sharp.Genetics.Entities
         /// </summary>
         /// <param name="partner">Partner to reproduce with. Another entity</param>
         /// <param name="mutationValue">
-        ///     Determines the value by which mutation affects traits of resulting entity (between 0 and
-        ///     1).
+        ///     Determines the value by which mutation affects traits of resulting entity (between 0 and 1).
         /// </param>
         /// <param name="mutationEffect">
-        ///     Determines how mutation affects value traits inherited by offspring.
+        ///     Determines how mutation affects value of traits inherited by offspring.
         ///     (Positively, negatively, or randomly meaning some traits positively and some negatively at random)
         /// </param>
         /// <param name="offspringName">Name of resulting offspring (empty string if not set).</param>
@@ -132,7 +132,7 @@ namespace ml_sharp.Genetics.Entities
         public GeneticEntity ReproduceOneWithPartner(GeneticEntity partner, float mutationValue,
             EMutationEffect mutationEffect = EMutationEffect.Random, string offspringName = "", int seed = 0)
         {
-            var info = new ReproductionInfo(1, mutationValue, mutationEffect,
+            var info = new ReproductionInfo(this, 1, mutationValue, mutationEffect,
                 true, partner, new[] {offspringName}, seed);
 
             return (GeneticEntity) GeneticAlgorithm.YieldOffspring(info);
@@ -147,7 +147,7 @@ namespace ml_sharp.Genetics.Entities
         ///     1).
         /// </param>
         /// <param name="mutationEffect">
-        ///     Determines how mutation affects value traits inherited by offspring.
+        ///     Determines how mutation affects value of traits inherited by offspring.
         ///     (Positively, negatively, or randomly meaning some traits positively and some negatively at random)
         /// </param>
         /// <param name="offspringNames">
@@ -163,7 +163,7 @@ namespace ml_sharp.Genetics.Entities
         public List<GeneticEntity> ReproduceBatch(int numOffspring, float mutationValue,
             EMutationEffect mutationEffect = EMutationEffect.Random, string[] offspringNames = null, int seed = 0)
         {
-            var info = new ReproductionInfo(numOffspring, mutationValue, mutationEffect,
+            var info = new ReproductionInfo(this, numOffspring, mutationValue, mutationEffect,
                 false, null, offspringNames, seed);
 
             return (List<GeneticEntity>) GeneticAlgorithm.YieldOffspring(info);
@@ -179,7 +179,7 @@ namespace ml_sharp.Genetics.Entities
         ///     1).
         /// </param>
         /// <param name="mutationEffect">
-        ///     Determines how mutation affects value traits inherited by offspring.
+        ///     Determines how mutation affects value of traits inherited by offspring.
         ///     (Positively, negatively, or randomly meaning some traits positively and some negatively at random)
         /// </param>
         /// <param name="offspringNames">
@@ -196,7 +196,7 @@ namespace ml_sharp.Genetics.Entities
             float mutationValue,
             EMutationEffect mutationEffect = EMutationEffect.Random, string[] offspringNames = null, int seed = 0)
         {
-            var info = new ReproductionInfo(numOffspring, mutationValue, mutationEffect,
+            var info = new ReproductionInfo(this, numOffspring, mutationValue, mutationEffect,
                 true, partner, offspringNames, seed);
 
             return (List<GeneticEntity>) GeneticAlgorithm.YieldOffspring(info);
