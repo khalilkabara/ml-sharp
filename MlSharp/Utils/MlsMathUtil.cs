@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 
 namespace ml_sharp.Utils
 {
-    public static class MlsRandomUtil
+    public static class MlsMathUtil
     {
         /// <summary>
         ///     Generates a random int value between 0 and 1 both inclusive.
@@ -22,6 +23,11 @@ namespace ml_sharp.Utils
         public static float GetRandom01(int seed = 0)
         {
             return seed == 0 ? (float) new Random().NextDouble() : (float) new Random(seed).NextDouble();
+        }
+
+        public static float GetAverage(params float[] values)
+        {
+            return values.Sum() / values.Length;
         }
     }
 }

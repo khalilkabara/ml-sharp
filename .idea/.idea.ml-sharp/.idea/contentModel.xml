@@ -45,11 +45,12 @@
         </e>
         <e p="Tests" t="Include">
           <e p="Program.cs" t="Include" />
+          <e p="son_of_alice.json" t="Include" />
           <e p="test_json.json" t="Include" />
         </e>
         <e p="Utils" t="Include">
           <e p="MlsLogger.cs" t="Include" />
-          <e p="MlsRandomUtil.cs" t="Include" />
+          <e p="MlsMathUtil.cs" t="Include" />
           <e p="MlsSerializationUtil.cs" t="Include" />
           <e p="MlsUuidUtil.cs" t="Include" />
         </e>

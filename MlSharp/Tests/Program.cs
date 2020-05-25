@@ -11,15 +11,26 @@ namespace ml_sharp.Tests
         private static void Main(string[] args)
         {
             var traits = CreateMockTraits();
-            var nodes = CreateMockNodes(traits);
-            var f1 = new Generation {Entities = nodes};
+            var entities = CreateMockEntities(traits);
+            var f1 = new Generation {Entities = entities};
 
             // new GeneticEntity().ReproduceBatch(13, 0.1f, .9f,)
             // Save json file
-            MlsSerializationUtil.Persist(f1, GetSavePath());
-            TestRandoms();
-            Console.WriteLine();
-            Console.WriteLine(new GeneticEntity().AsJson());
+            MlsSerializationUtil.Persist(f1, GetSavePath("test_json"));
+
+            var alice = entities[0];
+            var bob = entities[1];
+
+            // var sonOfAlice = alice.ReproduceOne(0.2f,
+            //     "Son Of Alice",
+            //     0);
+
+            var sonOfAlice = alice.ReproduceOneWithPartner(bob,
+                .9f,
+                "Bobie Jr");
+
+            MlsSerializationUtil.Persist(sonOfAlice, GetSavePath("son_of_alice"));
+            // Console.WriteLine(sonOfAlice.AsJson());
         }
 
         private static void TestRandoms()
@@ -29,8 +40,8 @@ namespace ml_sharp.Tests
 
             for (var i = 0; i < rands.Length; i++)
             {
-                rands[i] = MlsRandomUtil.GetRandomBinary(40);
-                randsf[i] = MlsRandomUtil.GetRandom01(42);
+                rands[i] = MlsMathUtil.GetRandomBinary(40);
+                randsf[i] = MlsMathUtil.GetRandom01(42);
             }
 
             foreach (var rand in rands) Console.Write(rand + ", ");
@@ -39,7 +50,7 @@ namespace ml_sharp.Tests
             foreach (var rand in randsf) Console.Write(rand + ", ");
         }
 
-        private static List<GeneticEntity> CreateMockNodes(List<Trait> traits)
+        private static List<GeneticEntity> CreateMockEntities(List<Trait> traits)
         {
             var alice = new GeneticEntity("Alice", traits);
             var bob = new GeneticEntity("Bob", traits);
@@ -67,20 +78,19 @@ namespace ml_sharp.Tests
         {
             var trait1 = new Trait("Size", 0.25f);
             var trait2 = new Trait("Color", 0.70f);
-            var trait3 = new Trait("Color");
-            var trait4 = new Trait();
+            var trait3 = new Trait();
 
-            var traits = new List<Trait> {trait1, trait2, trait3, trait4};
+            var traits = new List<Trait> {trait1, trait2, trait3};
 
             return traits;
         }
 
-        private static string GetSavePath()
+        private static string GetSavePath(string fileName)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             var basePath = currentDirectory.Split(new[] {"\\bin"}, StringSplitOptions.None)[0];
 
-            return basePath + "/Tests/test_json.json";
+            return basePath + "/Tests/" + fileName + ".json";
         }
     }
 }

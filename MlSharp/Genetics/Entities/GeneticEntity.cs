@@ -11,6 +11,8 @@ namespace ml_sharp.Genetics.Entities
     /// </summary>
     public class GeneticEntity : MlsNode
     {
+        private static float _maxGlobalMutationPercent = 0.25f;
+
         /// <summary>
         ///     Creates a genetic entity (node).
         /// </summary>
@@ -57,6 +59,28 @@ namespace ml_sharp.Genetics.Entities
         }
 
         /// <summary>
+        ///     The maximum allowed global percentage for mutations.
+        ///     Minimum allowed value for MaxGlobalMutationPercent is 0 and will be set to 0 if a lesser value is set.
+        ///     Maximum allowed value for MaxGlobalMutationPercent is 1 and will be set to 1 if a greater value is set.
+        /// </summary>
+        public static float MaxGlobalMutationPercent
+        {
+            get => _maxGlobalMutationPercent;
+
+            set
+            {
+                _maxGlobalMutationPercent = value < 0.0f ? 0.0f : value;
+                _maxGlobalMutationPercent = value > 1.0f ? 1.0f : value;
+            }
+        }
+
+        /// <summary>
+        ///     Determines how mutation affects value of traits inherited by offspring.
+        ///     Positively, negatively, or randomly meaning some traits positively and some negatively at random.
+        /// </summary>
+        public EMutationEffect GlobalMutationEffect { get; set; } = EMutationEffect.Random;
+
+        /// <summary>
         ///     List of all traits belonging to current GeneticEntity
         /// </summary>
         public List<Trait> Traits { get; set; }
@@ -89,13 +113,11 @@ namespace ml_sharp.Genetics.Entities
         ///     Reproduces an offspring using current entity as parent.
         /// </summary>
         /// <param name="mutationValue">
-        Began
-
-        /// Determines the value by which mutation affects traits of resulting entity (between 0 and 1).
-        /// </param>
-        /// <param name="mutationEffect">
-        ///     Determines how mutation affects value of traits inherited by offspring.
-        ///     (Positively, negatively, or randomly meaning some traits positively and some negatively at random)
+        ///     The percentage by which mutation affects traits of resulting entity (between 0 and MaxGlobalMutationPercent or 1,
+        ///     whichever is less).
+        ///     mutationValue is set to 0 if less than 0, MaxGlobalMutationPercent if greater than MaxGlobalMutationPercent, or 1
+        ///     if MaxGlobalMutationPercent is greater than 1.
+        ///     Maximum allowed value for MaxGlobalMutationPercent is 1 and will be set to 1 if a greater value is set.
         /// </param>
         /// <param name="offspringName">Name of resulting offspring (empty string if not set).</param>
         /// <param name="seed">
@@ -103,11 +125,10 @@ namespace ml_sharp.Genetics.Entities
         ///     When 0 is set, no seed is used. 0 is set by default
         /// </param>
         /// <returns>Returns a new GeneticEntity (offspring) built with criteria of current entity as base.</returns>
-        public GeneticEntity ReproduceOne(float mutationValue, EMutationEffect mutationEffect = EMutationEffect.Random,
-            string offspringName = "", int seed = 0)
+        public GeneticEntity ReproduceOne(float mutationValue, string offspringName = "", int seed = 0)
         {
-            var info = new ReproductionInfo(this, 1, mutationValue, mutationEffect,
-                false, null, new[] {offspringName}, seed);
+            var info = new ReproductionInfo(this, 1, mutationValue, GlobalMutationEffect,
+                false, null, false, new[] {offspringName}, seed);
 
             return (GeneticEntity) GeneticAlgorithm.YieldOffspring(info);
         }
@@ -117,11 +138,16 @@ namespace ml_sharp.Genetics.Entities
         /// </summary>
         /// <param name="partner">Partner to reproduce with. Another entity</param>
         /// <param name="mutationValue">
-        ///     Determines the value by which mutation affects traits of resulting entity (between 0 and 1).
+        ///     The percentage by which mutation affects traits of resulting entity (between 0 and MaxGlobalMutationPercent or 1,
+        ///     whichever is less).
+        ///     mutationValue is set to 0 if less than 0, MaxGlobalMutationPercent if greater than MaxGlobalMutationPercent, or 1
+        ///     if MaxGlobalMutationPercent is greater than 1.
+        ///     Maximum allowed value for MaxGlobalMutationPercent is 1 and will be set to 1 if a greater value is set.
         /// </param>
-        /// <param name="mutationEffect">
-        ///     Determines how mutation affects value of traits inherited by offspring.
-        ///     (Positively, negatively, or randomly meaning some traits positively and some negatively at random)
+        /// <param name="mergeCommonTraits">
+        ///     If or not to allow traits with same name from both parents.
+        ///     If set to true, all traits with common name on both parents will be flattened to one trait in resulting offspring.
+        ///     When false is set, offspring will be allowed to have multiple traits with same name.
         /// </param>
         /// <param name="offspringName">Name of resulting offspring (empty string if not set).</param>
         /// <param name="seed">
@@ -130,10 +156,10 @@ namespace ml_sharp.Genetics.Entities
         /// </param>
         /// <returns>Returns a new GeneticEntity (offspring) built with criteria of current entity as base.</returns>
         public GeneticEntity ReproduceOneWithPartner(GeneticEntity partner, float mutationValue,
-            EMutationEffect mutationEffect = EMutationEffect.Random, string offspringName = "", int seed = 0)
+            string offspringName = "", bool mergeCommonTraits = true, int seed = 0)
         {
-            var info = new ReproductionInfo(this, 1, mutationValue, mutationEffect,
-                true, partner, new[] {offspringName}, seed);
+            var info = new ReproductionInfo(this, 1, mutationValue, GlobalMutationEffect,
+                true, partner, mergeCommonTraits, new[] {offspringName}, seed);
 
             return (GeneticEntity) GeneticAlgorithm.YieldOffspring(info);
         }
@@ -143,12 +169,11 @@ namespace ml_sharp.Genetics.Entities
         /// </summary>
         /// <param name="numOffspring">Number of offspring to reproduce.</param>
         /// <param name="mutationValue">
-        ///     Determines the value by which mutation affects traits of resulting entity (between 0 and
-        ///     1).
-        /// </param>
-        /// <param name="mutationEffect">
-        ///     Determines how mutation affects value of traits inherited by offspring.
-        ///     (Positively, negatively, or randomly meaning some traits positively and some negatively at random)
+        ///     The percentage by which mutation affects traits of resulting entity (between 0 and MaxGlobalMutationPercent or 1,
+        ///     whichever is less).
+        ///     mutationValue is set to 0 if less than 0, MaxGlobalMutationPercent if greater than MaxGlobalMutationPercent, or 1
+        ///     if MaxGlobalMutationPercent is greater than 1.
+        ///     Maximum allowed value for MaxGlobalMutationPercent is 1 and will be set to 1 if a greater value is set.
         /// </param>
         /// <param name="offspringNames">
         ///     Array of names to be given to resulting offspring (empty strings if not set).
@@ -160,11 +185,11 @@ namespace ml_sharp.Genetics.Entities
         ///     When 0 is set, no seed is used. 0 is set by default
         /// </param>
         /// <returns>Returns a new GeneticEntity (offspring) built with criteria of current entity as base.</returns>
-        public List<GeneticEntity> ReproduceBatch(int numOffspring, float mutationValue,
-            EMutationEffect mutationEffect = EMutationEffect.Random, string[] offspringNames = null, int seed = 0)
+        public List<GeneticEntity> ReproduceBatch(int numOffspring, float mutationValue, string[] offspringNames = null,
+            int seed = 0)
         {
-            var info = new ReproductionInfo(this, numOffspring, mutationValue, mutationEffect,
-                false, null, offspringNames, seed);
+            var info = new ReproductionInfo(this, numOffspring, mutationValue, GlobalMutationEffect,
+                false, null, false, offspringNames, seed);
 
             return (List<GeneticEntity>) GeneticAlgorithm.YieldOffspring(info);
         }
@@ -175,12 +200,16 @@ namespace ml_sharp.Genetics.Entities
         /// <param name="partner">Partner to reproduce with. Another entity</param>
         /// <param name="numOffspring">Number of offspring to reproduce.</param>
         /// <param name="mutationValue">
-        ///     Determines the value by which mutation affects traits of resulting entity (between 0 and
-        ///     1).
+        ///     The percentage by which mutation affects traits of resulting entity (between 0 and MaxGlobalMutationPercent or 1,
+        ///     whichever is less).
+        ///     mutationValue is set to 0 if less than 0, MaxGlobalMutationPercent if greater than MaxGlobalMutationPercent, or 1
+        ///     if MaxGlobalMutationPercent is greater than 1.
+        ///     Maximum allowed value for MaxGlobalMutationPercent is 1 and will be set to 1 if a greater value is set.
         /// </param>
-        /// <param name="mutationEffect">
-        ///     Determines how mutation affects value of traits inherited by offspring.
-        ///     (Positively, negatively, or randomly meaning some traits positively and some negatively at random)
+        /// <param name="mergeCommonTraits">
+        ///     If or not to allow traits with same name from both parents.
+        ///     If set to true, all traits with common name on both parents will be flattened to one trait in resulting offspring.
+        ///     When false is set, offspring will be allowed to have multiple traits with same name.
         /// </param>
         /// <param name="offspringNames">
         ///     Array of names to be given to resulting offspring (empty strings if not set).
@@ -193,11 +222,10 @@ namespace ml_sharp.Genetics.Entities
         /// </param>
         /// <returns>Returns a new GeneticEntity (offspring) built with criteria of current entity as base.</returns>
         public List<GeneticEntity> ReproduceBatchWithPartner(GeneticEntity partner, int numOffspring,
-            float mutationValue,
-            EMutationEffect mutationEffect = EMutationEffect.Random, string[] offspringNames = null, int seed = 0)
+            float mutationValue, string[] offspringNames = null, bool mergeCommonTraits = true, int seed = 0)
         {
-            var info = new ReproductionInfo(this, numOffspring, mutationValue, mutationEffect,
-                true, partner, offspringNames, seed);
+            var info = new ReproductionInfo(this, numOffspring, mutationValue, GlobalMutationEffect,
+                true, partner, mergeCommonTraits, offspringNames, seed);
 
             return (List<GeneticEntity>) GeneticAlgorithm.YieldOffspring(info);
         }

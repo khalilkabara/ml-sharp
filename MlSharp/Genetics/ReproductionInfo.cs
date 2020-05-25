@@ -8,21 +8,22 @@ namespace ml_sharp.Genetics
     /// </summary>
     public struct ReproductionInfo
     {
-        public GeneticEntity EntityBeingBred { get; }
+        public GeneticEntity EntityBeingBred { get; set; }
 
-        public int NumOffspring { get; }
+        public int NumOffspring { get; set; }
 
-        public float MutationValue { get; }
+        public float MutationValue { get; set; }
 
-        public EMutationEffect MutationEffect { get; }
+        public EMutationEffect MutationEffect { get; set; }
 
-        public bool WithPartner { get; }
+        public bool WithPartner { get; set; }
 
-        public GeneticEntity Partner { get; }
+        public GeneticEntity Partner { get; set; }
+        public bool MergeCommonTraits { get; set; }
 
-        public string[] OffspringNames { get; }
+        public string[] OffspringNames { get; set; }
 
-        public int Seed { get; }
+        public int Seed { get; set; }
 
         /// <summary>
         ///     Creates a ReproductionInfo object.
@@ -39,6 +40,11 @@ namespace ml_sharp.Genetics
         /// </param>
         /// <param name="withPartner">If or not breeding will occur with a partner entity.</param>
         /// <param name="partner">Partner entity to breed with.</param>
+        /// <param name="mergeCommonTraits">
+        ///     If or not to allow traits with same name from both parents.
+        ///     If set to true, all traits with common name on both parents will be flattened to one trait in resulting offspring.
+        ///     When false is set, offspring will be allowed to have multiple traits with same name.
+        /// </param>
         /// <param name="offspringNames">
         ///     Array of names to be given to resulting offspring (empty strings if not set).
         ///     If length of names array is shorter than numOffspring, the first n offspring will be assigned names from this list
@@ -49,8 +55,8 @@ namespace ml_sharp.Genetics
         ///     When 0 is set, no seed is used. 0 is set by default
         /// </param>
         public ReproductionInfo(GeneticEntity entityBeingBred, int numOffspring, float mutationValue,
-            EMutationEffect mutationEffect, bool withPartner, GeneticEntity partner, string[] offspringNames,
-            int seed = 0)
+            EMutationEffect mutationEffect, bool withPartner, GeneticEntity partner, bool mergeCommonTraits,
+            string[] offspringNames, int seed = 0)
         {
             EntityBeingBred = entityBeingBred;
             NumOffspring = numOffspring;
@@ -58,6 +64,7 @@ namespace ml_sharp.Genetics
             MutationEffect = mutationEffect;
             WithPartner = withPartner;
             Partner = partner;
+            MergeCommonTraits = mergeCommonTraits;
             OffspringNames = offspringNames;
             Seed = seed;
         }

@@ -46,10 +46,17 @@ namespace ml_sharp.Genetics
             if (reproductionInfo.WithPartner) return ReproduceOneWithPartner(reproductionInfo);
 
             var offspring = new GeneticEntity();
-            MlsLogger.LogInfo("Reproducing one offspring...");
+            MlsLogger.LogInfo(reproductionInfo.EntityBeingBred.Name + " is reproducing one offspring...");
 
             if (reproductionInfo.OffspringNames != null && reproductionInfo.OffspringNames.Length > 0)
                 offspring.Name = reproductionInfo.OffspringNames[0];
+
+            offspring.GeneticStrength = CalculateInheritedValue(
+                reproductionInfo.EntityBeingBred.GeneticStrength,
+                reproductionInfo.EntityBeingBred.GeneticStrength,
+                reproductionInfo.MutationValue,
+                reproductionInfo.MutationEffect,
+                reproductionInfo.Seed);
 
             foreach (var newTrait in reproductionInfo.EntityBeingBred.Traits.Select(trait => new Trait(
                 trait.TraitName, CalculateInheritedValue(
@@ -59,20 +66,6 @@ namespace ml_sharp.Genetics
                     reproductionInfo.MutationEffect,
                     reproductionInfo.Seed))))
                 offspring.AddTrait(newTrait);
-
-            // foreach (var trait in reproductionInfo.EntityBeingBred.Traits)
-            // {
-            //     var newTrait = new Trait(
-            //         trait.TraitName, CalculateInheritedValue(
-            //             trait.TraitValue));
-            // }
-
-            offspring.GeneticStrength = CalculateInheritedValue(
-                reproductionInfo.EntityBeingBred.GeneticStrength,
-                reproductionInfo.EntityBeingBred.GeneticStrength,
-                reproductionInfo.MutationValue,
-                reproductionInfo.MutationEffect,
-                reproductionInfo.Seed);
 
             return offspring;
         }
@@ -85,11 +78,21 @@ namespace ml_sharp.Genetics
                 return null;
             }
 
-            var offspring = new GeneticEntity();
-            MlsLogger.LogInfo("Reproducing one offspring with partner...");
-            //todo: code
+            MlsLogger.LogInfo(reproductionInfo.EntityBeingBred.Name + " is reproducing one offspring with " +
+                reproductionInfo.Partner.Name + "...");
 
-            return offspring;
+            reproductionInfo.EntityBeingBred.GeneticStrength = MlsMathUtil.GetAverage(
+                reproductionInfo.EntityBeingBred.GeneticStrength,
+                reproductionInfo.Partner.GeneticStrength);
+
+            var partnerTraits = reproductionInfo.Partner.Traits;
+            reproductionInfo.EntityBeingBred.Traits.AddRange(partnerTraits);
+            // Remove duplicate traits if set to true, set value as average of duplicates
+
+            reproductionInfo.WithPartner = false;
+            reproductionInfo.Partner = null;
+
+            return ReproduceOne(reproductionInfo);
         }
 
         private static object ReproduceBatch(ReproductionInfo reproductionInfo)
@@ -97,7 +100,7 @@ namespace ml_sharp.Genetics
             if (reproductionInfo.WithPartner) return ReproduceBatchWithPartner(reproductionInfo);
 
             var offspring = new List<GeneticEntity>();
-            MlsLogger.LogInfo("Batch reproducing offspring...");
+            MlsLogger.LogInfo(reproductionInfo.EntityBeingBred.Name + " is batch reproducing offspring...");
             //todo: code
 
             return offspring;
@@ -112,7 +115,8 @@ namespace ml_sharp.Genetics
             }
 
             var offspring = new List<GeneticEntity>();
-            MlsLogger.LogInfo("Batch reproducing offspring with partner...");
+            MlsLogger.LogInfo(reproductionInfo.EntityBeingBred.Name + " is batch reproducing offspring with " +
+                reproductionInfo.Partner.Name + "...");
             //todo: code
 
             return offspring;
@@ -121,27 +125,41 @@ namespace ml_sharp.Genetics
         private static float CalculateInheritedValue(float originalValueInParent, float parentGeneticStrength,
             float mutationValue, EMutationEffect mutationEffect, in int seed)
         {
-            originalValueInParent *= parentGeneticStrength;
-            var value = 0.0f;
+            mutationValue = mutationValue < 0 ? 0 : mutationValue;
+            mutationValue = mutationValue > GeneticEntity.MaxGlobalMutationPercent
+                ? GeneticEntity.MaxGlobalMutationPercent
+                : mutationValue;
+
+            var value = originalValueInParent * parentGeneticStrength;
             switch (mutationEffect)
             {
                 case EMutationEffect.Negative:
                     //Decrease value.
+                    value -= mutationValue;
                     break;
                 case EMutationEffect.Positive:
                     // Increase value.
+                    value += mutationValue;
                     break;
                 case EMutationEffect.Random:
-                    if (MlsRandomUtil.GetRandomBinary(seed) == 0)
+                    if (MlsMathUtil.GetRandomBinary(seed) == 0)
                     {
                         //Decrease value.
+                        value -= mutationValue;
                     }
 
                     // Increase value.
+                    value += mutationValue;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mutationEffect), mutationEffect, null);
             }
+
+            value = value < 0 ? 0 : value;
+            value = value > 1 ? 1 : value;
+
+            // Round value to 2dp
+            value = (float) Math.Round(value * 100f) / 100f;
 
             return value;
         }
