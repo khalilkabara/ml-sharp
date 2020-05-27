@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using ml_sharp.Enums.Genetics;
 using ml_sharp.Genetics.Entities;
 using ml_sharp.Utils;
 
@@ -21,13 +22,15 @@ namespace ml_sharp.Tests
             var alice = entities[0];
             var bob = entities[1];
 
-            // var sonOfAlice = alice.ReproduceOne(0.2f,
-            //     "Son Of Alice",
-            //     0);
+            // var sonOfAlice = alice.ReproduceOne(0.75f,
+            //     EMutationEffect.Random,
+            //     "Son Of Alice");
 
             var sonOfAlice = alice.ReproduceOneWithPartner(bob,
-                .9f,
-                "Bobie Jr");
+                .45f,
+                EMutationEffect.Random,
+                "Bobbie Jr",
+                true);
 
             MlsSerializationUtil.Persist(sonOfAlice, GetSavePath("son_of_alice"));
             // Console.WriteLine(sonOfAlice.AsJson());
@@ -59,7 +62,8 @@ namespace ml_sharp.Tests
             var ethan = new GeneticEntity("Ethan", traits);
             var felix = new GeneticEntity("Felix", traits);
 
-            alice.AddTrait(new Trait("Size 2", 0.125f));
+            alice.AddTrait(new Trait("Unique To Alice", 0.125f));
+            bob.AddTrait(new Trait("Unique To Bobby", 0.533f));
 
             var nodes = new List<GeneticEntity>
             {

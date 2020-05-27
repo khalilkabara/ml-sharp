@@ -41,12 +41,14 @@ namespace ml_sharp.Genetics
         /// </summary>
         /// <param name="reproductionInfo">Reproduction criteria.</param>
         /// <returns>Returns reproduced offspring.</returns>
-        private static object ReproduceOne(ReproductionInfo reproductionInfo)
+        private static object ReproduceOne(ReproductionInfo reproductionInfo, bool secondHandCall = false)
         {
             if (reproductionInfo.WithPartner) return ReproduceOneWithPartner(reproductionInfo);
 
             var offspring = new GeneticEntity();
-            MlsLogger.LogInfo(reproductionInfo.EntityBeingBred.Name + " is reproducing one offspring...");
+
+            if (!secondHandCall)
+                MlsLogger.LogInfo(reproductionInfo.EntityBeingBred.Name + " is reproducing one offspring...");
 
             if (reproductionInfo.OffspringNames != null && reproductionInfo.OffspringNames.Length > 0)
                 offspring.Name = reproductionInfo.OffspringNames[0];
@@ -85,14 +87,36 @@ namespace ml_sharp.Genetics
                 reproductionInfo.EntityBeingBred.GeneticStrength,
                 reproductionInfo.Partner.GeneticStrength);
 
-            var partnerTraits = reproductionInfo.Partner.Traits;
-            reproductionInfo.EntityBeingBred.Traits.AddRange(partnerTraits);
-            // Remove duplicate traits if set to true, set value as average of duplicates
+            if (!reproductionInfo.MergeCommonTraits)
+            {
+                // Merge traits
+                reproductionInfo.EntityBeingBred.Traits.AddRange(reproductionInfo.Partner.Traits);
+            }
+            else
+            {
+                // Merge traits ignoring traits with same name.
+                var uniqueTraits = reproductionInfo.EntityBeingBred.Traits;
+
+                foreach (var trait in reproductionInfo.EntityBeingBred.Traits.ToList())
+                foreach (var traitInPartner in reproductionInfo.Partner.Traits.ToList())
+                    if (trait.TraitName.Equals(traitInPartner.TraitName))
+                    {
+                        traitInPartner.TraitValue =
+                            MlsMathUtil.GetAverage(traitInPartner.TraitValue, trait.TraitValue);
+                    }
+                    else
+                    {
+                        if (!uniqueTraits.Contains(traitInPartner))
+                            uniqueTraits.Add(traitInPartner);
+                    }
+
+                reproductionInfo.EntityBeingBred.Traits = uniqueTraits;
+            }
 
             reproductionInfo.WithPartner = false;
             reproductionInfo.Partner = null;
 
-            return ReproduceOne(reproductionInfo);
+            return ReproduceOne(reproductionInfo, true);
         }
 
         private static object ReproduceBatch(ReproductionInfo reproductionInfo)
@@ -125,10 +149,8 @@ namespace ml_sharp.Genetics
         private static float CalculateInheritedValue(float originalValueInParent, float parentGeneticStrength,
             float mutationValue, EMutationEffect mutationEffect, in int seed)
         {
-            mutationValue = mutationValue < 0 ? 0 : mutationValue;
-            mutationValue = mutationValue > GeneticEntity.MaxGlobalMutationPercent
-                ? GeneticEntity.MaxGlobalMutationPercent
-                : mutationValue;
+            mutationValue *= MlsMathUtil.GetRandomBetween(
+                GeneticEntity.MinGlobalMutationMultiplier, GeneticEntity.MaxGlobalMutationMultiplier, seed);
 
             var value = originalValueInParent * parentGeneticStrength;
             switch (mutationEffect)
@@ -143,10 +165,8 @@ namespace ml_sharp.Genetics
                     break;
                 case EMutationEffect.Random:
                     if (MlsMathUtil.GetRandomBinary(seed) == 0)
-                    {
                         //Decrease value.
                         value -= mutationValue;
-                    }
 
                     // Increase value.
                     value += mutationValue;
